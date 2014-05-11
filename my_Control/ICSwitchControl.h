@@ -35,4 +35,5 @@ typedef NS_ENUM(NSUInteger, ICSwitchControlStyle) {
 -(void)setCompleteSelectedBlock:(ICSwitchControlCompleteSelectedBlock)completeSelectedBlock;
 -(void)setLeftTitle:(NSString *)left RightTitle:(NSString *)right;
 -(void)setBackgroundColor:(UIColor *)backgroundColor forState:(ICSwitchControlState)state;
+
 @end

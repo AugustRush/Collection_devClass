@@ -48,7 +48,7 @@
 -(void)initConfig
 {
     //    self.backgroundColor = [UIColor blackColor];
-    
+
     UILabel *leftL = [[UILabel alloc] init];
     leftL.backgroundColor = [UIColor clearColor];
     leftL.textColor = [UIColor whiteColor];
@@ -64,9 +64,6 @@
     _rightTL = rightL;
     
     _DOT = [[UIView alloc] init];
-    _DOT.backgroundColor = [UIColor redColor];
-    _DOT.layer.borderColor = [UIColor clearColor].CGColor;
-    _DOT.layer.borderWidth = 2;
     [self addSubview:_DOT];
 
     _isOn = NO;
@@ -77,14 +74,15 @@
 
 -(void)layoutSubviews
 {
+    NSLog(@"test");
     [super layoutSubviews];
-//    self.layer.cornerRadius = CGRectGetHeight(self.frame)/2;
+    self.layer.cornerRadius = CGRectGetHeight(self.frame)/2;
     _leftTL.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame));
     _rightTL.frame = CGRectMake(CGRectGetWidth(self.frame)/2, 0, CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame));
     _leftTL.font = [UIFont systemFontOfSize:CGRectGetHeight(self.frame)/3];
     _rightTL.font = [UIFont systemFontOfSize:CGRectGetHeight(self.frame)/3];
-    _DOT.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame));
-    _DOT.transform = CGAffineTransformMakeScale(.92, .92);
+    _DOT.frame = CGRectMake(1, 1, CGRectGetWidth(self.frame)/2-2, CGRectGetHeight(self.frame)-2);
+    _DOT.layer.cornerRadius = CGRectGetHeight(self.frame)/2;
 }
 
 -(void)setStyle:(ICSwitchControlStyle)style
