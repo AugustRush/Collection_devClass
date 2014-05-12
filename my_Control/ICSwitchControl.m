@@ -74,7 +74,6 @@
 
 -(void)layoutSubviews
 {
-    NSLog(@"test");
     [super layoutSubviews];
     self.layer.cornerRadius = CGRectGetHeight(self.frame)/2;
     _leftTL.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame));
@@ -82,7 +81,9 @@
     _leftTL.font = [UIFont systemFontOfSize:CGRectGetHeight(self.frame)/3];
     _rightTL.font = [UIFont systemFontOfSize:CGRectGetHeight(self.frame)/3];
     _DOT.frame = CGRectMake(1, 1, CGRectGetWidth(self.frame)/2-2, CGRectGetHeight(self.frame)-2);
+    _DOT.center = self.isOn ? CGPointMake(CGRectGetWidth(self.frame)/4*3, CGRectGetHeight(self.frame)/2):CGPointMake(CGRectGetWidth(self.frame)/4, CGRectGetHeight(self.frame)/2);
     _DOT.layer.cornerRadius = CGRectGetHeight(self.frame)/2;
+    
 }
 
 -(void)setStyle:(ICSwitchControlStyle)style
