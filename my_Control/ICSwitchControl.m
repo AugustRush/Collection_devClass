@@ -11,7 +11,7 @@
 @interface ICSwitchControl ()
 
 @property (nonatomic, copy) ICSwitchControlCompleteSelectedBlock completeSelectedBlock;
-@property (nonatomic, retain) NSMutableDictionary *StateColorDict;
+@property (nonatomic, strong) NSMutableDictionary *StateColorDict;
 
 @end
 
@@ -53,6 +53,7 @@
     leftL.backgroundColor = [UIColor clearColor];
     leftL.textColor = [UIColor whiteColor];
     leftL.textAlignment = 1;
+    leftL.adjustsFontSizeToFitWidth = YES;
     [self addSubview:leftL];
     _leftTL = leftL;
     
@@ -60,6 +61,7 @@
     rightL.backgroundColor = [UIColor clearColor];
     rightL.textColor = [UIColor whiteColor];
     rightL.textAlignment = 1;
+    rightL.adjustsFontSizeToFitWidth = YES;
     [self addSubview:rightL];
     _rightTL = rightL;
     
@@ -108,9 +110,14 @@
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor
 {
-    [self setBackgroundColor:backgroundColor forState:ICSwitchControlStateOn];
-    [self setBackgroundColor:backgroundColor forState:ICSwitchControlStateOff];
-    [self setBackgroundColor:backgroundColor forState:ICSwitchControlStateHightlight];
+    
+    self.StateColorDict[@(ICSwitchControlStateOff)] ? NULL:[self setBackgroundColor:backgroundColor forState:ICSwitchControlStateOff];
+    
+    self.StateColorDict[@(ICSwitchControlStateOn)] ? NULL:[self setBackgroundColor:backgroundColor forState:ICSwitchControlStateOn];
+
+    
+    self.StateColorDict[@(ICSwitchControlStateHightlight)] ? NULL:[self setBackgroundColor:backgroundColor forState:ICSwitchControlStateHightlight];
+
 }
 
 -(void)setBackgroundColor:(UIColor *)backgroundColor forState:(ICSwitchControlState)state
@@ -171,8 +178,12 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint p = [[touches anyObject] locationInView:self];
-    
     self.isOn = p.x > CGRectGetWidth(self.frame)/2 ? YES:NO;
+}
+
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self touchesEnded:touches withEvent:event];
 }
 
 -(void)setLeftTitle:(NSString *)left RightTitle:(NSString *)right
